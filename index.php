@@ -69,7 +69,15 @@ $response = curl_exec($ch);
 $result = json_decode($response, true);
 
 if ($result['status'] == 'ok') {
-    echo $result['dlink'];
-} else echo $result;
+    $responseArray = array(
+        "status" => "ok",
+        "link" => $result['dlink']
+    );   
+    $responseJSON = json_encode($responseArray); 
+    echo $responseJSON;
+} else {
+    $responseJSON = json_encode($result); 
+    echo $responseJSON;
+} 
 
 curl_close($ch);
