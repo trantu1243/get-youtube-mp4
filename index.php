@@ -69,9 +69,18 @@ $response = curl_exec($ch);
 $result = json_decode($response, true);
 
 if ($result['status'] == 'ok') {
+    $ftype = $result['ftype'];
+    $quality = $result['fquality'];
+    $label = $ftype . ' ' . $quality . 'p';
+
+    $default = (intval($quality) >= 480) ? true : false;
+
+    $type = 'video/' . $ftype;
     $responseArray = array(
-        "status" => "ok",
-        "link" => $result['dlink']
+        "file" => $result['dlink'],
+        "label" => $label,
+        "type" => $type,
+        "default" => $default
     );   
     $responseJSON = json_encode($responseArray); 
     echo $responseJSON;
