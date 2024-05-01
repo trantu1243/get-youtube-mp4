@@ -68,8 +68,6 @@ $response = curl_exec($ch);
 
 $result = json_decode($response, true);
 
-echo $response;
-
 if ($result['status'] == 'ok') {
     echo $result['dlink'];
 } else echo $result;
