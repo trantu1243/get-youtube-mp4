@@ -5,6 +5,16 @@ $url = $_GET['url'];
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, 'https://9convert.com/api/ajaxSearch/index');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+if(isset($_GET['proxy'])) {
+    $proxy = $_GET['proxy'];
+    $arr = explode(":", $proxy);
+    
+    curl_setopt($ch, CURLOPT_PROXY, $arr[0]);
+    curl_setopt($ch, CURLOPT_PROXYPORT, $arr[1]);
+    curl_setopt($ch, CURLOPT_PROXYUSERPWD, "$arr[2]:$arr[3]");
+}
+
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Accept: */*',
@@ -44,6 +54,14 @@ curl_close($ch);
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, 'https://9convert.com/api/ajaxConvert/convert');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+if(isset($_GET['proxy'])) {
+    $proxy = $_GET['proxy'];
+    $arr = explode(":", $proxy);
+    
+    curl_setopt($ch, CURLOPT_PROXY, $arr[0]);
+    curl_setopt($ch, CURLOPT_PROXYPORT, $arr[1]);
+    curl_setopt($ch, CURLOPT_PROXYUSERPWD, "$arr[2]:$arr[3]");
+}
 curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
     'Accept: */*',
